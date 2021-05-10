@@ -69,16 +69,16 @@ class Candidature
     private $OffreEmploi;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="candidatures")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $Utilisateur;
-
-    /**
      * @ORM\OneToOne(targetEntity=RendezVous::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $Rendez_vous;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="candidatures")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     public function getId(): ?int
     {
@@ -205,18 +205,6 @@ class Candidature
         return $this;
     }
 
-    public function getUtilisateur(): ?Utilisateur
-    {
-        return $this->Utilisateur;
-    }
-
-    public function setUtilisateur(?Utilisateur $Utilisateur): self
-    {
-        $this->Utilisateur = $Utilisateur;
-
-        return $this;
-    }
-
     public function getRendezVous(): ?RendezVous
     {
         return $this->Rendez_vous;
@@ -225,6 +213,18 @@ class Candidature
     public function setRendezVous(RendezVous $Rendez_vous): self
     {
         $this->Rendez_vous = $Rendez_vous;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

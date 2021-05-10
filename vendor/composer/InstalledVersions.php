@@ -25,16 +25,25 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => 'v4.4.99',
-    'version' => '4.4.99.0',
+    'pretty_version' => 'dev-main',
+    'version' => 'dev-main',
     'aliases' => 
     array (
     ),
-    'reference' => NULL,
-    'name' => 'symfony/website-skeleton',
+    'reference' => '1e26da341a3cad840726afdcf882770e058f1f4e',
+    'name' => '__root__',
   ),
   'versions' => 
   array (
+    '__root__' => 
+    array (
+      'pretty_version' => 'dev-main',
+      'version' => 'dev-main',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '1e26da341a3cad840726afdcf882770e058f1f4e',
+    ),
     'composer/package-versions-deprecated' => 
     array (
       'pretty_version' => '1.11.99.1',
@@ -388,8 +397,8 @@ private static $installed = array (
     array (
       'provided' => 
       array (
-        0 => '1.0',
-        1 => '1.0.0',
+        0 => '1.0.0',
+        1 => '1.0',
       ),
     ),
     'psr/simple-cache-implementation' => 
@@ -407,6 +416,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '430d14c01836b77c28092883d195a43ce413ee32',
+    ),
+    'swiftmailer/swiftmailer' => 
+    array (
+      'pretty_version' => 'v6.2.7',
+      'version' => '6.2.7.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '15f7faf8508e04471f666633addacf54c0ab5933',
     ),
     'symfony/asset' => 
     array (
@@ -628,6 +646,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '98e855fd35dd2c4614f61d349b1fd7dd3622b9b9',
+    ),
+    'symfony/google-mailer' => 
+    array (
+      'pretty_version' => 'v4.4.20',
+      'version' => '4.4.20.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '441f147a329db99f7d7c351654c7c8e2f5585b1a',
     ),
     'symfony/http-client' => 
     array (
@@ -975,6 +1002,15 @@ private static $installed = array (
       ),
       'reference' => 'c5572f6494fc20668a73b77684d8dc77e534d8cf',
     ),
+    'symfony/swiftmailer-bundle' => 
+    array (
+      'pretty_version' => 'v3.5.2',
+      'version' => '3.5.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '6b72355549f02823a2209180f9c035e46ca3f178',
+    ),
     'symfony/translation' => 
     array (
       'pretty_version' => 'v4.4.21',
@@ -1063,15 +1099,6 @@ private static $installed = array (
       ),
       'reference' => 'a0132156e5ef6dba53d0c5a37f7c138da1194612',
     ),
-    'symfony/website-skeleton' => 
-    array (
-      'pretty_version' => 'v4.4.99',
-      'version' => '4.4.99.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => NULL,
-    ),
     'symfony/yaml' => 
     array (
       'pretty_version' => 'v4.4.22',
@@ -1080,6 +1107,24 @@ private static $installed = array (
       array (
       ),
       'reference' => '1c2fd24147961525eaefb65b11987cab75adab59',
+    ),
+    'symfonycasts/reset-password-bundle' => 
+    array (
+      'pretty_version' => 'v1.8.0',
+      'version' => '1.8.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'a41cceff06039e586619b1505af05f77b22b41b5',
+    ),
+    'symfonycasts/verify-email-bundle' => 
+    array (
+      'pretty_version' => 'v1.5.0',
+      'version' => '1.5.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '8c21aa9aa6b7123afed213e72485e8dad75e5dcf',
     ),
     'twig/extra-bundle' => 
     array (
