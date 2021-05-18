@@ -13,20 +13,14 @@ class RegistrationType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('roles')
             ->add('password')
             ->add('Nom_utilisateur')
             ->add('CIN')
             ->add('Telephone')
             ->add('Date_naissance')
             ->add('Type')
-            ->add('Login')
             ->add('Photo')
             ->add('CV')
-            ->add('nbr_postulation')
-            ->add('date_last_login')
-            ->add('Etat')
-            ->add('isVerified')
         ;
     }
 
