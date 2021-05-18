@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '1e26da341a3cad840726afdcf882770e058f1f4e',
+    'reference' => 'fa95e5356a3eed20133f0191574a2cea946e3c1c',
     'name' => '__root__',
   ),
   'versions' => 
@@ -42,7 +42,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '1e26da341a3cad840726afdcf882770e058f1f4e',
+      'reference' => 'fa95e5356a3eed20133f0191574a2cea946e3c1c',
     ),
     'composer/package-versions-deprecated' => 
     array (
@@ -196,6 +196,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '56070bebac6e77230ed7d306ad13528e60732871',
+    ),
+    'easycorp/easyadmin-bundle' => 
+    array (
+      'pretty_version' => 'v3.3.0',
+      'version' => '3.3.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '650834fcdfcef4389894fd9b752b8e2c0c30534a',
     ),
     'egulias/email-validator' => 
     array (
@@ -794,6 +803,15 @@ private static $installed = array (
         0 => '*',
       ),
     ),
+    'symfony/polyfill-intl-grapheme' => 
+    array (
+      'pretty_version' => 'v1.22.1',
+      'version' => '1.22.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '5601e09b69f26c1828b13b6bb87cb07cddba3170',
+    ),
     'symfony/polyfill-intl-icu' => 
     array (
       'pretty_version' => 'v1.22.1',
@@ -877,6 +895,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'dc3063ba22c2a1fd2f45ed856374d79114998f91',
+    ),
+    'symfony/polyfill-uuid' => 
+    array (
+      'pretty_version' => 'v1.22.1',
+      'version' => '1.22.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '9773608c15d3fe6ba2b6456a124777a7b8ffee2a',
     ),
     'symfony/process' => 
     array (
@@ -1002,6 +1029,15 @@ private static $installed = array (
       ),
       'reference' => 'c5572f6494fc20668a73b77684d8dc77e534d8cf',
     ),
+    'symfony/string' => 
+    array (
+      'pretty_version' => 'v5.2.8',
+      'version' => '5.2.8.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '01b35eb64cac8467c3f94cd0ce2d0d376bb7d1db',
+    ),
     'symfony/swiftmailer-bundle' => 
     array (
       'pretty_version' => 'v3.5.2',
@@ -1053,6 +1089,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '7cee73b45e3bd963a0ab4184f1041dcdc85b6e86',
+    ),
+    'symfony/uid' => 
+    array (
+      'pretty_version' => 'v5.2.6',
+      'version' => '5.2.6.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '47d4347b762f0bab9b4ec02112ddfaaa6d79481b',
     ),
     'symfony/validator' => 
     array (
