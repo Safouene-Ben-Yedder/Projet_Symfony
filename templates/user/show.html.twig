@@ -8,8 +8,7 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Photo</th>
-                <td>{{ user.Photo }}</td>
+                <img src="{{ asset('/uploads/photo/' ~ user.Photo) }}" alt="" width="150">
             </tr>
             <tr>
                 <th>Nom_utilisateur</th>
@@ -37,7 +36,7 @@
             </tr>
             <tr>
                 <th>CV</th>
-                <td>{{ user.CV }}</td>
+                <td><a href="{{ asset('uploads/CV/' ~ user.CV) }}">Voir le CV</a></td>
             </tr>
         </tbody>
     </table>

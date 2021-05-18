@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @Route("/profil")
@@ -37,7 +39,43 @@ class UserController extends AbstractController
                 $form->handleRequest($request);
         
                 if ($form->isSubmitted() && $form->isValid()) {
+                    // pour le cv
+                    $CVFile = $form->get('CV')->getData();
+
+                    if ($CVFile) {
+                        $originalFilename = pathinfo($CVFile->getClientOriginalName(), PATHINFO_FILENAME);
+                        $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                        $newFilename = $safeFilename.'-'.uniqid().'.'.$CVFile->guessExtension();
+                        try {
+                            $CVFile->move(
+                                $this->getParameter('cv_directory'),
+                                $newFilename
+                            );
+                        } catch (FileException $e) {
+                            // ... handle exception if something happens during file upload
+                        }
+                        $user->setCV($newFilename);
+                    }
+
+                    // pour la photo du profil
+                    $PhotoFile = $form->get('Photo')->getData();
+
+                    if ($PhotoFile) {
+                        $originalPhotoName = pathinfo($PhotoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                        $safePhotoName = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalPhotoName);
+                        $newPhotoName = $safePhotoName.'-'.uniqid().'.'.$PhotoFile->guessExtension();
+                        try {
+                            $PhotoFile->move(
+                                $this->getParameter('photo_directory'),
+                                $newPhotoName
+                            );
+                        } catch (FileException $e) {
+                            // ... handle exception if something happens during file upload
+                        }
+                        $user->setPhoto($newPhotoName);
+                    }
                     $this->getDoctrine()->getManager()->flush();
+                    
                     return $this->redirectToRoute('user_show');
                 }
         
