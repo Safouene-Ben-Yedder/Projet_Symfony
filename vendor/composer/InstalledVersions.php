@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'fa95e5356a3eed20133f0191574a2cea946e3c1c',
+    'reference' => 'b591152369bbba977be8b4491aaf7aa347368eda',
     'name' => '__root__',
   ),
   'versions' => 
@@ -42,7 +42,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'fa95e5356a3eed20133f0191574a2cea946e3c1c',
+      'reference' => 'b591152369bbba977be8b4491aaf7aa347368eda',
     ),
     'composer/package-versions-deprecated' => 
     array (
@@ -223,6 +223,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '121af47c9aee9c03031bdeca3fac0540f59aa5c3',
+    ),
+    'jms/metadata' => 
+    array (
+      'pretty_version' => '2.5.0',
+      'version' => '2.5.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'b5c52549807b2d855b3d7e36ec164c00eb547338',
     ),
     'laminas/laminas-code' => 
     array (
@@ -1188,6 +1197,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '1f3b7e2c06cc05d42936a8ad508ff1db7975cdc5',
+    ),
+    'vich/uploader-bundle' => 
+    array (
+      'pretty_version' => '1.17.1',
+      'version' => '1.17.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '94ba188f2603fad9bf9d2a88c61444f5e52a11df',
     ),
     'webmozart/assert' => 
     array (

@@ -8,6 +8,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
+use App\Entity\Regles;
+
 
 class DashboardController extends AbstractDashboardController
 {
@@ -29,5 +31,6 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Candidats', 'fas fa-users', User::class);
+        yield MenuItem::linkToCrud('Règles', 'fas fa-ruler-vertical', Regles::class);
     }
 }

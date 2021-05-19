@@ -12,6 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * `@Vich\Uploadable
  */
 class User implements UserInterface
 {
@@ -77,12 +78,6 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $CV;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $nbr_postulation;
-
     /**
      * @ORM\Column(type="date", nullable=true)
      */
@@ -102,6 +97,11 @@ class User implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Regles::class, inversedBy="users")
+     */
+    private $regles;
 
     public function __construct()
     {
@@ -285,18 +285,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getNbrPostulation(): ?int
-    {
-        return $this->nbr_postulation;
-    }
-
-    public function setNbrPostulation(int $nbr_postulation): self
-    {
-        $this->nbr_postulation = $nbr_postulation;
-
-        return $this;
-    }
-
     public function getDateLastLogin(): ?\DateTimeInterface
     {
         return $this->date_last_login;
@@ -359,6 +347,18 @@ class User implements UserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getRegles(): ?Regles
+    {
+        return $this->regles;
+    }
+
+    public function setRegles(?Regles $regles): self
+    {
+        $this->regles = $regles;
 
         return $this;
     }

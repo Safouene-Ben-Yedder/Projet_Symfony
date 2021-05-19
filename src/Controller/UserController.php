@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * @Route("/profil")
+ * @Route("/candidat/profil")
 */
 class UserController extends AbstractController
 {
