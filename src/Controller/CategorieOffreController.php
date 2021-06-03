@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/categorie/offre")
+ * @Route("recruteur/categorie")
  */
 class CategorieOffreController extends AbstractController
 {

@@ -22,19 +22,18 @@ class OffreEmploiRepository extends ServiceEntityRepository
     // /**
     //  * @return OffreEmploi[] Returns an array of OffreEmploi objects
     //  */
-    /*
-    public function findByExampleField($value)
+    
+    public function findByRecruiter($value)
     {
         return $this->createQueryBuilder('o')
-            ->andWhere('o.exampleField = :val')
+            ->andWhere('o.id_recruteur= :val')
             ->setParameter('val', $value)
             ->orderBy('o.id', 'ASC')
-            ->setMaxResults(10)
+            // ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?OffreEmploi

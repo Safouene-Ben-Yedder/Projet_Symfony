@@ -22,19 +22,21 @@ class CandidatureRepository extends ServiceEntityRepository
     // /**
     //  * @return Candidature[] Returns an array of Candidature objects
     //  */
-    /*
-    public function findByExampleField($value)
+    
+    public function findByUserOffre($offremploi, $user)
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('c.OffreEmploi = :val1')
+            ->andWhere('c.user = :val2')
+            ->setParameter('val1', $offremploi)
+            ->setParameter('val2', $user)
             ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
+            ->setMaxResults(1)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?Candidature

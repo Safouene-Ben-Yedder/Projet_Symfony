@@ -60,6 +60,37 @@ class OffreEmploi
      */
     private $candidatures;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="offreEmplois")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $id_recruteur;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $responsabilites;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $benefices;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $statut;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $location;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $salaire;
+
     public function __construct()
     {
         $this->candidatures = new ArrayCollection();
@@ -180,6 +211,78 @@ class OffreEmploi
                 $candidature->setOffreEmploi(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIdRecruteur(): ?User
+    {
+        return $this->id_recruteur;
+    }
+
+    public function setIdRecruteur(?User $id_recruteur): self
+    {
+        $this->id_recruteur = $id_recruteur;
+
+        return $this;
+    }
+
+    public function getResponsabilites(): ?string
+    {
+        return $this->responsabilites;
+    }
+
+    public function setResponsabilites(?string $responsabilites): self
+    {
+        $this->responsabilites = $responsabilites;
+
+        return $this;
+    }
+
+    public function getBenefices(): ?string
+    {
+        return $this->benefices;
+    }
+
+    public function setBenefices(?string $benefices): self
+    {
+        $this->benefices = $benefices;
+
+        return $this;
+    }
+
+    public function getStatut(): ?string
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(string $statut): self
+    {
+        $this->statut = $statut;
+
+        return $this;
+    }
+
+    public function getLocation(): ?string
+    {
+        return $this->location;
+    }
+
+    public function setLocation(string $location): self
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    public function getSalaire(): ?string
+    {
+        return $this->salaire;
+    }
+
+    public function setSalaire(string $salary): self
+    {
+        $this->salary = $salaire;
 
         return $this;
     }

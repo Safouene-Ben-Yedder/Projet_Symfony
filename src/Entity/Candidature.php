@@ -23,46 +23,6 @@ class Candidature
     private $Date_Creation;
 
     /**
-     * @ORM\Column(type="date")
-     */
-    private $Date_naissance;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Nationnalite;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $photo;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $CV;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Description;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Email;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $Telephone;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $Etat_Candidature;
-
-    /**
      * @ORM\ManyToOne(targetEntity=OffreEmploi::class, inversedBy="candidatures")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -70,7 +30,7 @@ class Candidature
 
     /**
      * @ORM\OneToOne(targetEntity=RendezVous::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $Rendez_vous;
 
@@ -79,6 +39,11 @@ class Candidature
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $etatCandidature;
 
     public function getId(): ?int
     {
@@ -97,98 +62,14 @@ class Candidature
         return $this;
     }
 
-    public function getDateNaissance(): ?\DateTimeInterface
-    {
-        return $this->Date_naissance;
-    }
-
-    public function setDateNaissance(\DateTimeInterface $Date_naissance): self
-    {
-        $this->Date_naissance = $Date_naissance;
-
-        return $this;
-    }
-
-    public function getNationnalite(): ?string
-    {
-        return $this->Nationnalite;
-    }
-
-    public function setNationnalite(string $Nationnalite): self
-    {
-        $this->Nationnalite = $Nationnalite;
-
-        return $this;
-    }
-
-    public function getPhoto(): ?string
-    {
-        return $this->photo;
-    }
-
-    public function setPhoto(string $photo): self
-    {
-        $this->photo = $photo;
-
-        return $this;
-    }
-
-    public function getCV(): ?string
-    {
-        return $this->CV;
-    }
-
-    public function setCV(string $CV): self
-    {
-        $this->CV = $CV;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->Description;
-    }
-
-    public function setDescription(string $Description): self
-    {
-        $this->Description = $Description;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->Email;
-    }
-
-    public function setEmail(string $Email): self
-    {
-        $this->Email = $Email;
-
-        return $this;
-    }
-
-    public function getTelephone(): ?int
-    {
-        return $this->Telephone;
-    }
-
-    public function setTelephone(int $Telephone): self
-    {
-        $this->Telephone = $Telephone;
-
-        return $this;
-    }
-
     public function getEtatCandidature(): ?int
     {
-        return $this->Etat_Candidature;
+        return $this->etatCandidature;
     }
 
-    public function setEtatCandidature(int $Etat_Candidature): self
+    public function setEtatCandidature(int $etatCandidature): self
     {
-        $this->Etat_Candidature = $Etat_Candidature;
+        $this->etatCandidature = $etatCandidature;
 
         return $this;
     }

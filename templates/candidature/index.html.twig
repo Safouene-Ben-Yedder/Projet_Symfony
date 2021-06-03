@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Candidature index{% endblock %}
+
+{% block body %}
+    <!-- Page Heading Section Start -->
+    <div class="page-heading-section section bg-parallax" data-bg-image="assets/images/bg/bg-1.jpg" data-overlay="50">
+        <div class="container">
+            <div class="page-heading-content text-center">
+                <h3 class="title">Liste des candidatures</h3>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Accueil</a></li>
+                    <li class="breadcrumb-item active">Liste des candidatures</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <!-- Page Heading Section End -->
+    <h1>Nombre de postulations: {{ nbrepostulation }}</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom de l'offre</th>
+                <th>Nom de la société</th>
+                <th>Date_Creation</th>
+                <th>EtatCandidature</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for candidature in candidatures %}
+            <tr>
+                <td>{{ candidature.id }}</td>
+                <td>{{ candidature.OffreEmploi.NomOffre }}</td>
+                <td>{{ candidature.OffreEmploi.IdRecruteur.NomUtilisateur }}</td>
+                <td>{{ candidature.DateCreation ? candidature.DateCreation|date('Y-m-d') : '' }}</td>
+                <td>{{ candidature.etatCandidature ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('candidature_show', {'id': candidature.id}) }}">show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

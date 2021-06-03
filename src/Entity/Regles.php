@@ -20,6 +20,11 @@ class Regles
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $nom;
+
+    /**
      * @ORM\Column(type="integer")
      */
     private $nbr_postulation;
@@ -30,7 +35,7 @@ class Regles
     private $duree_expiration;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, mappedBy="regles")
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="regles")
      */
     private $users;
 
@@ -44,6 +49,18 @@ class Regles
         return $this->id;
     }
 
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+    
     public function getNbrPostulation(): ?int
     {
         return $this->nbr_postulation;
@@ -96,5 +113,13 @@ class Regles
         }
 
         return $this;
+    }
+
+    public function __toString(){
+        if (is_null($this->nom)) {
+            return 'NULL';
+        } else {
+            return $this->nom;    
+        }
     }
 }

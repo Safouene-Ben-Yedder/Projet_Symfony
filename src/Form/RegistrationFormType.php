@@ -11,6 +11,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -39,8 +41,30 @@ class RegistrationFormType extends AbstractType
             ->add('Telephone')
             ->add('Date_naissance')
             ->add('Type')
-            ->add('Photo')
-            ->add('CV')
+            ->add('Photo', FileType::class, array('data_class' => null), [
+                'mapped' => false,
+                'constraints' => [
+                    new File([
+                        'mimeTypes' => [
+                            'image/jpeg',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid JPG image',
+                    ])
+                ],
+            ])
+            ->add('CV', FileType::class, [
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'mimeTypes' => [
+                            'application/pdf',
+                            'application/x-pdf',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid PDF document',
+                    ])
+                ],
+            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [

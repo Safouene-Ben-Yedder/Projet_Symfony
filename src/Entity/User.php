@@ -45,7 +45,7 @@ class User implements UserInterface
     private $Nom_utilisateur;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $CIN;
 
@@ -55,19 +55,14 @@ class User implements UserInterface
     private $Telephone;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
     private $Date_naissance;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Type;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $Login;
+    private $Type;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -75,7 +70,7 @@ class User implements UserInterface
     private $Photo;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $CV;
     /**
@@ -99,13 +94,19 @@ class User implements UserInterface
     private $isVerified = false;
 
     /**
-     * @ORM\OneToOne(targetEntity=Regles::class, inversedBy="users")
+     * @ORM\ManyToOne(targetEntity=Regles::class, inversedBy="users")
      */
     private $regles;
+
+    /**
+     * @ORM\OneToMany(targetEntity=OffreEmploi::class, mappedBy="id_recruteur")
+     */
+    private $offreEmplois;
 
     public function __construct()
     {
         $this->candidatures = new ArrayCollection();
+        $this->offreEmplois = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -249,18 +250,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getLogin(): ?string
-    {
-        return $this->Login;
-    }
-
-    public function setLogin(string $Login): self
-    {
-        $this->Login = $Login;
-
-        return $this;
-    }
-
     public function getPhoto(): ?string
     {
         return $this->Photo;
@@ -303,6 +292,11 @@ class User implements UserInterface
     public function getCandidatures(): Collection
     {
         return $this->candidatures;
+    }
+
+    public function getNbrePos(): int
+    {
+        return count($this->candidatures);
     }
 
     public function addCandidature(candidature $candidature): self
@@ -359,6 +353,58 @@ class User implements UserInterface
     public function setRegles(?Regles $regles): self
     {
         $this->regles = $regles;
+
+        return $this;
+    }
+
+    // public function getOffreEmploi(): ?OffreEmploi
+    // {
+    //     return $this->offreEmploi;
+    // }
+
+    // public function setOffreEmploi(?OffreEmploi $offreEmploi): self
+    // {
+    //     // unset the owning side of the relation if necessary
+    //     if ($offreEmploi === null && $this->offreEmploi !== null) {
+    //         $this->offreEmploi->setIdRecruiter(null);
+    //     }
+
+    //     // set the owning side of the relation if necessary
+    //     if ($offreEmploi !== null && $offreEmploi->getIdRecruiter() !== $this) {
+    //         $offreEmploi->setIdRecruiter($this);
+    //     }
+
+    //     $this->offreEmploi = $offreEmploi;
+
+    //     return $this;
+    // }
+
+    /**
+     * @return Collection|OffreEmploi[]
+     */
+    public function getOffreEmplois(): Collection
+    {
+        return $this->offreEmplois;
+    }
+
+    public function addOffreEmploi(OffreEmploi $offreEmploi): self
+    {
+        if (!$this->offreEmplois->contains($offreEmploi)) {
+            $this->offreEmplois[] = $offreEmploi;
+            $offreEmploi->setIdRecruteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffreEmploi(OffreEmploi $offreEmploi): self
+    {
+        if ($this->offreEmplois->removeElement($offreEmploi)) {
+            // set the owning side to null (unless already changed)
+            if ($offreEmploi->getIdRecruteur() === $this) {
+                $offreEmploi->setIdRecruteur(null);
+            }
+        }
 
         return $this;
     }

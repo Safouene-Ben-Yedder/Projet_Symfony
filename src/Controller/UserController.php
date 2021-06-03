@@ -35,7 +35,7 @@ class UserController extends AbstractController
     {   
             $candidat = $this->getUser();
             if ($user->getId() == $candidat->getId()) {
-                $form = $this->createForm(UserType::class, $user);
+                $form = $this->createForm(UserType::class, $candidat);
                 $form->handleRequest($request);
         
                 if ($form->isSubmitted() && $form->isValid()) {
@@ -80,7 +80,7 @@ class UserController extends AbstractController
                 }
         
                 return $this->render('user/edit.html.twig', [
-                    'user' => $user,
+                    'user' => $candidat,
                     'form' => $form->createView(),
                 ]);
             } else {
