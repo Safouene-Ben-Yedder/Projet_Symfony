@@ -16,36 +16,85 @@
         </div>
     </div>
     <!-- Page Heading Section End -->
-    <h1>Nombre de postulations: {{ nbrepostulation }}</h1>
+    <!-- Recent Jobs Start -->
+    <div class="section section-padding">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="title">Nombre de postulations: {{ nbrepostulation }}</h2>
+            </div>
+            <!-- Job List Wrap Start -->
+            <div class="job-list-wrap">
+                {% for candidature in candidatures %}
+                <!-- Job List Start -->
+                <a href="job-single.html" class="job-list">
+                    <div class="company-logo col-auto">
+                        <img src="assets/images/companies/company-1.png" alt="Company Logo">
+                    </div>
+                    <div class="salary-type col-auto order-sm-3">
+                        {# <span class="salary-range">$5000 - $8000</span> #}
+                        <span class="badge badge-success">{{ candidature.etatCandidature ? 'Yes' : 'No' }}</span>
+                    </div>
+                    <div class="content col">
+                        <h6 class="title">{{ candidature.OffreEmploi.NomOffre }}</h6>
+                        <ul class="meta">
+                            <li><strong class="text-primary">{{ candidature.OffreEmploi.IdRecruteur.NomUtilisateur }}</strong></li>
+                            <li><i class="fa fa-clock"></i>&nbsp;&nbsp;{{ candidature.DateCreation ? candidature.DateCreation|date('Y-m-d') : '' }}</li>
+                        </ul>
+                    </div>
+                </a>
+                {% else %}
+                    <tr>
+                        <td colspan="4">no records found</td>
+                    </tr>
+                {% endfor %}
+                <!-- Job List Start -->
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom de l'offre</th>
-                <th>Nom de la société</th>
-                <th>Date_Creation</th>
-                <th>EtatCandidature</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for candidature in candidatures %}
-            <tr>
-                <td>{{ candidature.id }}</td>
-                <td>{{ candidature.OffreEmploi.NomOffre }}</td>
-                <td>{{ candidature.OffreEmploi.IdRecruteur.NomUtilisateur }}</td>
-                <td>{{ candidature.DateCreation ? candidature.DateCreation|date('Y-m-d') : '' }}</td>
-                <td>{{ candidature.etatCandidature ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('candidature_show', {'id': candidature.id}) }}">show</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                {# <!-- Job List Start -->
+                <a href="job-single.html" class="job-list">
+                    <div class="company-logo col-auto">
+                        <img src="assets/images/companies/company-2.png" alt="Company Logo">
+                    </div>
+                    <div class="salary-type col-auto order-sm-3">
+                        <span class="salary-range">$7000 - $13000</span>
+                        <span class="badge badge-warning">Part Time</span>
+                    </div>
+                    <div class="content col">
+                        <h6 class="title">Product UI & UX Expert</h6>
+                        <ul class="meta">
+                            <li><strong class="text-primary">Astha</strong></li>
+                            <li><i class="fa fa-map-marker"></i> 2020 Willshire Glen, GA-30009</li>
+                        </ul>
+                    </div>
+                </a>
+                <!-- Job List Start -->
+
+                <!-- Job List Start -->
+                <a href="job-single.html" class="job-list">
+                    <div class="company-logo col-auto">
+                        <img src="assets/images/companies/company-3.png" alt="Company Logo">
+                    </div>
+                    <div class="salary-type col-auto order-sm-3">
+                        <span class="salary-range">$5000 - $8000</span>
+                        <span class="badge badge-danger">Freelance</span>
+                    </div>
+                    <div class="content col">
+                        <h6 class="title">Full Stack Backend Developer</h6>
+                        <ul class="meta">
+                            <li><strong class="text-primary">Github</strong></li>
+                            <li><i class="fa fa-map-marker"></i> 2020 Willshire Glen, GA-30009</li>
+                        </ul>
+                    </div>
+                </a>
+                <!-- Job List Start --> #}
+
+            </div>
+            <!-- Job List Wrap Start -->
+
+            <div class="text-center mt-4 mt-lg-5">
+                <a href="job-list.html" class="btn btn-primary">View All Jobs</a>
+            </div>
+
+        </div>
+    </div>
+    <!-- Recent Jobs End -->
 {% endblock %}
