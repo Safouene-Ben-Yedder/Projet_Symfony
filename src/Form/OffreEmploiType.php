@@ -19,6 +19,11 @@ class OffreEmploiType extends AbstractType
             ->add('Exigences')
             ->add('Nbr_Places')
             ->add('CategorieOffre')
+            ->add('responsabilites')
+            ->add('benefices')
+            ->add('statut')
+            ->add('location')
+            ->add('salaire')
         ;
     }
 

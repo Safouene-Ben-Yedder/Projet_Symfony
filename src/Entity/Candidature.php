@@ -29,12 +29,6 @@ class Candidature
     private $OffreEmploi;
 
     /**
-     * @ORM\OneToOne(targetEntity=RendezVous::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $Rendez_vous;
-
-    /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="candidatures")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -44,6 +38,26 @@ class Candidature
      * @ORM\Column(type="boolean")
      */
     private $etatCandidature;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $RendezVousDateTime;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $RendezVousComment;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $RendezVousEnligne;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $RendezVousPlaceLink;
 
     public function getId(): ?int
     {
@@ -106,6 +120,54 @@ class Candidature
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getRendezVousDateTime(): ?\DateTimeInterface
+    {
+        return $this->RendezVousDateTime;
+    }
+
+    public function setRendezVousDateTime(?\DateTimeInterface $RendezVousDateTime): self
+    {
+        $this->RendezVousDateTime = $RendezVousDateTime;
+
+        return $this;
+    }
+
+    public function getRendezVousComment(): ?string
+    {
+        return $this->RendezVousComment;
+    }
+
+    public function setRendezVousComment(?string $RendezVousComment): self
+    {
+        $this->RendezVousComment = $RendezVousComment;
+
+        return $this;
+    }
+
+    public function getRendezVousEnligne(): ?bool
+    {
+        return $this->RendezVousEnligne;
+    }
+
+    public function setRendezVousEnligne(?bool $RendezVousEnligne): self
+    {
+        $this->RendezVousEnligne = $RendezVousEnligne;
+
+        return $this;
+    }
+
+    public function getRendezVousPlaceLink(): ?string
+    {
+        return $this->RendezVousPlaceLink;
+    }
+
+    public function setRendezVousPlaceLink(?string $RendezVousPlaceLink): self
+    {
+        $this->RendezVousPlaceLink = $RendezVousPlaceLink;
 
         return $this;
     }

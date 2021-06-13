@@ -15,7 +15,6 @@ class CandidatureType extends AbstractType
             ->add('Date_Creation')
             ->add('etatCandidature')
             ->add('OffreEmploi')
-            ->add('Rendez_vous')
             ->add('user')
         ;
     }

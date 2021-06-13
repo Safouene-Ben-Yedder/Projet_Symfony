@@ -280,9 +280,9 @@ class OffreEmploi
         return $this->salaire;
     }
 
-    public function setSalaire(string $salary): self
+    public function setSalaire(string $salaire): self
     {
-        $this->salary = $salaire;
+        $this->salaire = $salaire;
 
         return $this;
     }
