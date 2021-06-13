@@ -35,7 +35,7 @@ class Candidature
     private $user;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="integer")
      */
     private $etatCandidature;
 
@@ -170,5 +170,13 @@ class Candidature
         $this->RendezVousPlaceLink = $RendezVousPlaceLink;
 
         return $this;
+    }
+
+
+    public function setNull(){
+        $this->getRendezVousComment = null ;
+        $this->getRendezVousEnligne= null ;
+        $this->getRendezVousPlaceLink = null ;
+        $this->getRendezVousDateTime = null ;
     }
 }
