@@ -66,6 +66,7 @@ class RegistrationController extends AbstractController
             $user->setRoles(['ROLE_CANDIDAT']);
             $user->setEtat(1);
             $user->setDateLastLogin(new \DateTime('now'));
+            $user->setRegles(1);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
