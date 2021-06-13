@@ -18,7 +18,7 @@ use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-
+use App\Repository\ReglesRepository;
 
 class RegistrationController extends AbstractController
 {
@@ -32,10 +32,11 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator): Response
+    public function register(ReglesRepository $ReglesRepository, Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
+        $regles = $ReglesRepository->find(1);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -57,6 +58,23 @@ class RegistrationController extends AbstractController
                 $user->setCV($newFilename);
             }
 
+            $photo = $form->get('Photo')->getData();
+
+            if ($photo) {
+                $originalFilename = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$photo->guessExtension();
+                try {
+                    $photo->move(
+                        $this->getParameter('photo_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+                $user->setPhoto($newFilename);
+            }
+
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
@@ -66,7 +84,7 @@ class RegistrationController extends AbstractController
             $user->setRoles(['ROLE_CANDIDAT']);
             $user->setEtat(1);
             $user->setDateLastLogin(new \DateTime('now'));
-            $user->setRegles(1);
+            $user->setRegles($regles);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
