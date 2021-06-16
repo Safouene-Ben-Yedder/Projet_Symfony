@@ -80,7 +80,7 @@ class CandidatureRecController extends AbstractController
     }
 
     /**
-     * @Route("/", name="candidature_rec_Refuser", methods={"GET","POST"})
+     * @Route("/{id}", name="candidature_rec_Refuser", methods={"GET","POST"})
      */
     public function Refuser(Request $request, Candidature $candidature): Response
     {
@@ -92,12 +92,12 @@ class CandidatureRecController extends AbstractController
     }
 
     /**
-     * @Route("/", name="SupprimerRV", methods={"GET","POST"})
+     * @Route("/SupprimerRV/{id}", name="SupprimerRV", methods={"GET","POST"})
      */
     public function SupprimerRV(Request $request, Candidature $candidature): Response
     {
 
-            $candidature->setNull();
+            $candidature->setRendezVousDateTime(null);
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('candidature_rec_index');
 

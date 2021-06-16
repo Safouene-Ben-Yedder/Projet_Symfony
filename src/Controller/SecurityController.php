@@ -14,7 +14,9 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        if ($this->getUser()->getRoles() == ["ROLE_RECRUTEUR"]) {
+
+        if ($this->getUser()) {
+            if ($this->getUser()->getRoles() == ["ROLE_RECRUTEUR"]) {
                 return $this->redirectToRoute('offre_emploi_byrecuiter');
         } 
 
@@ -25,7 +27,8 @@ class SecurityController extends AbstractController
         if ($this->getUser()->getRoles() == ["ROLE_ADMIN"]) {
             return $this->redirectToRoute('admin');
         } 
-
+        }
+        
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
