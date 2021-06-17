@@ -91,6 +91,7 @@ class OffreEmploi
      */
     private $salaire;
 
+
     public function __construct()
     {
         $this->candidatures = new ArrayCollection();
@@ -286,6 +287,9 @@ class OffreEmploi
 
         return $this;
     }
-
+    public function __toString()
+    {
+        return $this->Nom_offre;
+    }
 
 }

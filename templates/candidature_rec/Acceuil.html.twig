@@ -52,13 +52,14 @@
 
                     <!-- Header Menu Start -->
                     <nav id="main-menu" class="main-menu col-lg-auto order-lg-2">
-                        <ul>
+                     <ul>
                             <li class="has-children"><a href="{{ path('home') }}">Accueil</a></li>
-                            <li class="has-children"><a href="{{ path('offre_emploi_byrecuiter') }}">Les candidatures</a></li>
-                            <li class="has-children"><a href="{{ path('offre_emploi_index') }}">Les candidatures Réfusées</a></li>
-
+                            <li class="has-children"><a href="{{ path('offre_emploi_byrecuiter') }}">Mes offres d'emploi</a></li>
+                            <li class="has-children"><a href="{{ path('offre_emploi_index') }}">Offres d'emploi</a></li>
+                            <li><a href="{{ path('candidature_index') }}">Les candidatures</a></li>
                             
-                        </ul>
+                        </ul> 
+
                     </nav>
                     <!-- Header Menu End -->
                 </div>
@@ -74,7 +75,7 @@
     <div class="page-heading-section section bg-parallax" data-bg-image="{{asset('assets/images/bg/bg-1.jpg')}}" data-overlay="50">
         <div class="container">
             <div class="page-heading-content text-center">
-                <h3 class="title">Les candidatures Acceptée</h3>
+                <h3 class="title">Accueil</h3>
                 <ol class="breadcrumb">
                     <li><a href="#" >{{ app.user.NomUtilisateur }}</a></li>
                     {# <li class="breadcrumb-item active">Mon profil</li> #}
@@ -90,74 +91,6 @@
                     <div class="faq-card card">
                     <!-- Page Heading Section End -->
 
-    <table class="table">
-        <thead>
-            <tr>
-
-                <th>Date de postulation</th>
-                <th>Candidat</th>
-                <th>Etat Candidature</th>
-                <th>Date et heure du rendez vous</th>
-                <th>Commentaire du rendez vous</th>
-                <th>En ligne </th>
-                <th>Place ou Link</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for candidature in candidatures %}
-
-            <tr>
-            
-            {% if candidature.etatCandidature == 2 %}
-            {% set h = candidature.OffreEmploi.getIdRecruteur() %}
-            {% set s = h.id  %} 
-
-
-            {% if s ==  app.user.id %}
-
-
-                <td>{{ candidature.DateCreation ? candidature.DateCreation|date('Y-m-d') : '' }}</td>
-                <td>{{ candidature.user.NomUtilisateur}}</td>
-                <td>{{ candidature.etatCandidature ? 'Acceptée' : 'En attente' }}</td>
-                {% if candidature.RendezVousEnligne != null %}
-                <td>{{ candidature.RendezVousDateTime ? candidature.RendezVousDateTime|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ candidature.RendezVousComment }}</td>
-                <td>{{ candidature.RendezVousEnligne ? 'Oui' : 'Non' }}</td>
-                <td>{{ candidature.RendezVousPlaceLink }}</td>
-                {% else %}
-                <td>Pas encore crée </td>
-                <td>Pas encore crée</td>
-                <td>Pas encore crée</td>
-                <td>Pas encore crée</td>
-                 {% endif %}
-                {% endif %}
-                <td>
-                    <a href="{{ path('candidature_rec_show', {'id': candidature.id}) }}">show</a>
-                    {% if candidature.etatCandidature == 1 %}
-                    <a href="{{ path('candidature_rec_edit', {'id': candidature.id}) }}">Valider</a> {# tsir creation mta3 rendez vous w validation  #}
-                    <a href="{{ path('candidature_rec_Refuser', {'id': candidature.id}) }}">Réfuser Candidature</a> {# etat te5ou 2 #}
-                    {% endif %}
-                    {% if candidature.RendezVousEnligne != null %}
-                    <a href="{{ path('SupprimerRV', {'id': candidature.id}) }}">Supprimer Rendez Vous</a> {# ken fama rendez vous tsir suppression / deja validé  #}
-                    {% endif %}
-
-                    {% if candidature.RendezVousEnligne == null %} {# validé ama render vous supprimer donc ynajm yaawed yaamel rendez vous  #}
-                    {% if candidature.etatCandidature == 2  %}
-                    <a href="{{ path('candidature_rec_edit', {'id': candidature.id}) }}">Créer Rendez Vous</a> 
-                    {% endif %}
-                    {% endif %}
-
-
-                </td>
-                {% endif %}
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">Pas de candidatures</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
+    
+</div>
 {% endblock %}
