@@ -1,3 +1,8 @@
 home:
    path: /
    controller: App\Controller\HomeController::index
+
+Acceuil:
+   path: /recruteur/Acceuil
+   controller: App\Controller\HomeController::index
+

@@ -53,9 +53,9 @@
                     <!-- Header Menu Start -->
                     <nav id="main-menu" class="main-menu col-lg-auto order-lg-2">
                         <ul>
-                            <li class="has-children"><a href="{{ path('home') }}">Accueil</a></li>
-                            <li class="has-children"><a href="{{ path('offre_emploi_byrecuiter') }}">Mes candidatures</a></li>
-                            <li class="has-children"><a href="{{ path('offre_emploi_index') }}">Mes candidatures Acceptées</a></li>
+                            <li class="has-children"><a href="{{ path('Accueil') }}">Accueil</a></li>
+                            <li class="has-children"><a href="{{ path('candidature_rec_index') }}">Mes candidatures</a></li>
+                            <li class="has-children"><a href="{{ path('candidature_rec_index1') }}">Mes candidatures Acceptées</a></li>
 
 
                             
@@ -134,7 +134,7 @@
                  {% endif %}
                 {% endif %}
                 <td>
-                    <a href="{{ path('candidature_rec_show', {'id': candidature.id}) }}">show</a>
+                    <a href="{{ path('candidature_rec_show', {'id': candidature.id}) }}">Voir</a>
                     {% if candidature.etatCandidature == 1 %}
                     <a href="{{ path('candidature_rec_edit', {'id': candidature.id}) }}">Valider</a> {# tsir creation mta3 rendez vous w validation  #}
                     <a href="{{ path('candidature_rec_Refuser', {'id': candidature.id}) }}">Réfuser Candidature</a> {# etat te5ou 2 #}
@@ -161,9 +161,7 @@
 
         {% else %}
 
-            <tr>
-                <td colspan="8">Pas de candidatures</td>
-            </tr>
+
             {% endif %}
         {% endfor %}
 

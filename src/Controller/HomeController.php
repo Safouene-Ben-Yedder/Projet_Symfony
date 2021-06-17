@@ -16,4 +16,12 @@ class HomeController extends AbstractController
     {   
         return $this->render('home/index.html.twig');
     }
+
+    /**
+     * @Route("/recruteur/Acceuil", name="Acceuil", methods={"GET","POST"})
+     */
+    public function Acceuil()
+    {
+        return $this->render('home/Acceuil.html.twig');
+    }
 }

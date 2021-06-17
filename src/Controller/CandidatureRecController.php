@@ -25,6 +25,7 @@ class CandidatureRecController extends AbstractController
         ]);
     }
 
+
         /**
      * @Route("/A/", name="candidature_rec_index1", methods={"GET"})
      */
