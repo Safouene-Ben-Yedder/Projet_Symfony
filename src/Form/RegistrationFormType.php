@@ -13,6 +13,8 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+
 
 class RegistrationFormType extends AbstractType
 {
@@ -39,7 +41,10 @@ class RegistrationFormType extends AbstractType
             ->add('Nom_utilisateur')
             ->add('CIN')
             ->add('Telephone')
-            ->add('Date_naissance')
+            ->add('Date_naissance', DateType::class, [
+                'widget' => 'single_text',
+                'input'  => 'datetime_immutable',
+            ])
             ->add('Type')
             ->add('Photo', FileType::class, array('data_class' => null), [
                 'mapped' => false,

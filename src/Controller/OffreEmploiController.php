@@ -59,7 +59,7 @@ class OffreEmploiController extends AbstractController
     }
 
     /**
-     * @Route("/recruteur/offredemploi/{id}", name="offre_emploi_show", methods={"GET"})
+     * @Route("/recruteur/offredemploi/{id}", name="offre_emploi_show_byrecuiter", methods={"GET"})
      */
     public function showForRecruiter(OffreEmploi $offreEmploi): Response
     {   
@@ -67,6 +67,9 @@ class OffreEmploiController extends AbstractController
         if ($offreEmploi->getIdRecruteur()->getId() == $candidat->getId()) {
             return $this->render('offre_emploi/show.html.twig', [
             'offre_emploi' => $offreEmploi,
+            'error' => null,
+            'success' => null,
+            'nbrePostul' => null,
         ]);
         } else {
             return $this->redirectToRoute('offre_emploi_byrecuiter');

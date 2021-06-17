@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Form\UserPhotoEditType;
+use App\Form\UserCVEditType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,41 +41,7 @@ class UserController extends AbstractController
                 $form->handleRequest($request);
         
                 if ($form->isSubmitted() && $form->isValid()) {
-                    // pour le cv
-                    $CVFile = $form->get('CV')->getData();
-
-                    if ($CVFile) {
-                        $originalFilename = pathinfo($CVFile->getClientOriginalName(), PATHINFO_FILENAME);
-                        $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
-                        $newFilename = $safeFilename.'-'.uniqid().'.'.$CVFile->guessExtension();
-                        try {
-                            $CVFile->move(
-                                $this->getParameter('cv_directory'),
-                                $newFilename
-                            );
-                        } catch (FileException $e) {
-                            // ... handle exception if something happens during file upload
-                        }
-                        $user->setCV($newFilename);
-                    }
-
-                    // pour la photo du profil
-                    $PhotoFile = $form->get('Photo')->getData();
-
-                    if ($PhotoFile) {
-                        $originalPhotoName = pathinfo($PhotoFile->getClientOriginalName(), PATHINFO_FILENAME);
-                        $safePhotoName = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalPhotoName);
-                        $newPhotoName = $safePhotoName.'-'.uniqid().'.'.$PhotoFile->guessExtension();
-                        try {
-                            $PhotoFile->move(
-                                $this->getParameter('photo_directory'),
-                                $newPhotoName
-                            );
-                        } catch (FileException $e) {
-                            // ... handle exception if something happens during file upload
-                        }
-                        $user->setPhoto($newPhotoName);
-                    }
+                    
                     $this->getDoctrine()->getManager()->flush();
                     
                     return $this->redirectToRoute('user_show');
@@ -118,6 +85,50 @@ class UserController extends AbstractController
                         }
                         $user->setPhoto($newPhotoName);
                     }
+                    $this->getDoctrine()->getManager()->flush();
+                    
+                    return $this->redirectToRoute('user_show');
+                }
+        
+                return $this->render('user/editPhoto.html.twig', [
+                    'user' => $candidat,
+                    'form' => $form->createView(),
+                ]);
+            } else {
+                return $this->redirectToRoute('user_show');
+            }
+    }
+
+    /**
+     * @Route("/edit/cv/{id}", name="user_cv_edit", methods={"GET","POST"})
+     */
+    public function editCV(Request $request, User $user): Response
+    {   
+            $candidat = $this->getUser();
+            if ($user->getId() == $candidat->getId()) {
+                $form = $this->createForm(UserCVEditType::class, $candidat);
+                $form->handleRequest($request);
+        
+                if ($form->isSubmitted() && $form->isValid()) {
+
+                   // pour le cv
+                   $CVFile = $form->get('CV')->getData();
+
+                   if ($CVFile) {
+                       $originalFilename = pathinfo($CVFile->getClientOriginalName(), PATHINFO_FILENAME);
+                       $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                       $newFilename = $safeFilename.'-'.uniqid().'.'.$CVFile->guessExtension();
+                       try {
+                           $CVFile->move(
+                               $this->getParameter('cv_directory'),
+                               $newFilename
+                           );
+                       } catch (FileException $e) {
+                           // ... handle exception if something happens during file upload
+                       }
+                       $user->setCV($newFilename);
+                   }
+
                     $this->getDoctrine()->getManager()->flush();
                     
                     return $this->redirectToRoute('user_show');

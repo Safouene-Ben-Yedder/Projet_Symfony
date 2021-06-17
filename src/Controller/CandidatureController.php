@@ -41,40 +41,51 @@ class CandidatureController extends AbstractController
         $reglePostul = $this->getUser()->getRegles()->getNbrPostulation();
         $cndture = $candidatureRepository->findByUserOffre($offre, $this->getUser());
 
-        if (count($cndture) == 0 ) {
-            if ($nbrePostul <= $reglePostul) {
-                $candidature = new Candidature();
-                $candidature->setUser($this->getUser());       
-                $candidature->setOffreEmploi($offre);
-                $candidature->setDateCreation($date);
-                $candidature->setEtatCandidature(1);
-        
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($candidature);
-                $entityManager->flush();
-        
-                return $this->render('offre_emploi/show.html.twig', [
-                    'offre_emploi' => $offreEmploi,
-                    'success' => "La postulation a été effectuée avec succés",
-                    'error' => null,
-                    'nbrePostul' => count($cndture)+1,
-                ]);
+        if ($this->getUser()->isVerified() == 1 ) {
+            if (count($cndture) == 0 ) {
+                if ($nbrePostul <= $reglePostul) {
+                    $candidature = new Candidature();
+                    $candidature->setUser($this->getUser());       
+                    $candidature->setOffreEmploi($offre);
+                    $candidature->setDateCreation($date);
+                    $candidature->setEtatCandidature(1);
+                    $candidature->setCv($this->getUser()->getCV());
+                    
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager->persist($candidature);
+                    $entityManager->flush();
+            
+                    return $this->render('offre_emploi/show.html.twig', [
+                        'offre_emploi' => $offreEmploi,
+                        'success' => "La postulation a été effectuée avec succés",
+                        'error' => null,
+                        'nbrePostul' => count($cndture)+1,
+                    ]);
+                } else {
+                    return $this->render('offre_emploi/show.html.twig', [
+                        'offre_emploi' => $offreEmploi,
+                        'success' => null,
+                        'error' => "Vous avez atteint le nombre de postulation autorisée",
+                        'nbrePostul' => count($cndture),
+                    ]);
+                }
             } else {
-                return $this->render('offre_emploi/show.html.twig', [
-                    'offre_emploi' => $offreEmploi,
-                    'success' => null,
-                    'error' => "Vous avez atteint le nombre de postulation autorisée",
-                    'nbrePostul' => count($cndture),
-                ]);
+                    return $this->render('offre_emploi/show.html.twig', [
+                        'offre_emploi' => $offreEmploi,
+                        'success' => null,
+                        'error' => "Vous avez dejà postulé à cet offre",
+                        'nbrePostul' => count($cndture),
+                    ]);
             }
         } else {
-                return $this->render('offre_emploi/show.html.twig', [
-                    'offre_emploi' => $offreEmploi,
-                    'success' => null,
-                    'error' => "Vous avez dejà postulé à cet offre",
-                    'nbrePostul' => count($cndture),
-                ]);
+                    return $this->render('offre_emploi/show.html.twig', [
+                        'offre_emploi' => $offreEmploi,
+                        'success' => null,
+                        'error' => "Votre compte n'est pas confirmé",
+                        'nbrePostul' => count($cndture),
+                    ]);
         }
+
     }
 
     /**
