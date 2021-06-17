@@ -25,6 +25,26 @@ class CandidatureRecController extends AbstractController
         ]);
     }
 
+        /**
+     * @Route("/A/", name="candidature_rec_index1", methods={"GET"})
+     */
+    public function index1(CandidatureRepository $candidatureRepository): Response
+    {
+        return $this->render('candidature_rec/index1.html.twig', [
+            'candidatures' => $candidatureRepository->findAll(),
+        ]);
+    }
+
+        /**
+     * @Route("/R/", name="candidature_rec_index2", methods={"GET"})
+     */
+    public function index2(CandidatureRepository $candidatureRepository): Response
+    {
+        return $this->render('candidature_rec/index2.html.twig', [
+            'candidatures' => $candidatureRepository->findAll(),
+        ]);
+    }
+
     /**
      * @Route("/new", name="candidature_rec_new", methods={"GET","POST"})
      */
@@ -80,12 +100,12 @@ class CandidatureRecController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="candidature_rec_Refuser", methods={"GET","POST"})
+     * @Route("/candidature_rec_Refuser/{id}", name="candidature_rec_Refuser", methods={"GET","POST"})
      */
     public function Refuser(Request $request, Candidature $candidature): Response
     {
 
-            $candidature->setEtatCandidature(5);
+            $candidature->setEtatCandidature(0);
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('candidature_rec_index');
 
@@ -95,9 +115,12 @@ class CandidatureRecController extends AbstractController
      * @Route("/SupprimerRV/{id}", name="SupprimerRV", methods={"GET","POST"})
      */
     public function SupprimerRV(Request $request, Candidature $candidature): Response
-    {
+    {   
 
             $candidature->setRendezVousDateTime(null);
+            $candidature->setRendezVousComment(null);
+            $candidature->setRendezVousEnligne(null);
+            $candidature->setRendezVousPlaceLink(null);
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('candidature_rec_index');
 

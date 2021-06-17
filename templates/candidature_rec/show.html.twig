@@ -3,23 +3,55 @@
 {% block title %}Candidature{% endblock %}
 
 {% block body %}
-    <h1>Candidature</h1>
+    <h1>Candidature</h1><br>
 
+    <h3>Informations sur la candidature</h3>
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ candidature.id }}</td>
-            </tr>
-            <tr>
-                <th>Date_Creation</th>
+                <th>Date de postulation</th>
                 <td>{{ candidature.DateCreation ? candidature.DateCreation|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
                 <th>EtatCandidature</th>
-                <td>{{ candidature.etatCandidature ? 'Yes' : 'No' }}</td>
+                <td>{{ candidature.etatCandidature ? 'Acceptée' : 'En attente' }}</td>
             </tr>
             <tr>
+                <th> Nom candidat</th>
+                <td>{{ candidature.user.NomUtilisateur }}</td>
+            </tr>
+            <tr>
+                <img src="{{ asset('/uploads/photo/' ~ candidature.user.Photo) }}" alt="" width="150">
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ candidature.user.email }}</td>
+            </tr>
+            <tr>
+                <th>CIN</th>
+                <td>{{ candidature.user.CIN }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ candidature.user.Telephone }}</td>
+            </tr>
+            <tr>
+                <th>Date_naissance</th>
+                <td>{{ candidature.user.DateNaissance ? candidature.user.DateNaissance|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>CV</th>
+                <td><a href="{{ asset('uploads/CV/' ~ candidature.user.CV) }}">Voir le CV</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <h3>Rendez Vous</h3>
+    {% if candidature.RendezVousComment != null %}
+    <table class="table">
+    <tbody>
+                <tr>
                 <th>RendezVousDateTime</th>
                 <td>{{ candidature.RendezVousDateTime ? candidature.RendezVousDateTime|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
@@ -35,12 +67,20 @@
                 <th>RendezVousPlaceLink</th>
                 <td>{{ candidature.RendezVousPlaceLink }}</td>
             </tr>
-        </tbody>
+    </tbody>
     </table>
+{% else  %}
+<p style="font-weight: bold;"> Pas encore crée</p>
+<a href="{{ path('candidature_rec_edit', {'id': candidature.id}) }}">Créer Rendez Vous</a><br>
+{% endif %}
+
+
+
+{% if candidature.etatCandidature == 1 %}
+<a href="{{ path('candidature_rec_edit', {'id': candidature.id}) }}">Valider</a> {# tsir creation mta3 rendez vous w validation  #}
+<a href="{{ path('candidature_rec_Refuser', {'id': candidature.id}) }}">Réfuser Candidature</a> {# etat te5ou 2 #}<br>
+{% endif %}
 
     <a href="{{ path('candidature_rec_index') }}">back to list</a>
 
-    <a href="{{ path('candidature_rec_edit', {'id': candidature.id}) }}">edit</a>
-
-    {{ include('candidature_rec/_delete_form.html.twig') }}
 {% endblock %}

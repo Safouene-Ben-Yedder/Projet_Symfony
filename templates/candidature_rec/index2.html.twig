@@ -24,7 +24,7 @@
 
             <tr>
             
-            {% if candidature.etatCandidature != 0 %}
+            {% if candidature.etatCandidature == 0 %}
             {% set h = candidature.OffreEmploi.getIdRecruteur() %}
             {% set s = h.id  %} 
 
@@ -65,13 +65,22 @@
 
 
                 </td>
-                {% endif %}
+                
             </tr>
+                {% if candidature.etatCandidature != 0 %}
+                    <tr>
+                <td colspan="8">Pas de candidatures</td>
+            </tr>
+            {% endif %}
+
         {% else %}
+
             <tr>
                 <td colspan="8">Pas de candidatures</td>
             </tr>
+            {% endif %}
         {% endfor %}
+
         </tbody>
     </table>
 

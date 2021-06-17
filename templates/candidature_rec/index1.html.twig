@@ -24,7 +24,7 @@
 
             <tr>
             
-            {% if candidature.etatCandidature != 0 %}
+            {% if candidature.etatCandidature == 2 %}
             {% set h = candidature.OffreEmploi.getIdRecruteur() %}
             {% set s = h.id  %} 
 

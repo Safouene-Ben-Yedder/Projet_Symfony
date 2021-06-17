@@ -172,11 +172,4 @@ class Candidature
         return $this;
     }
 
-
-    public function setNull(){
-        $this->getRendezVousComment = null ;
-        $this->getRendezVousEnligne= null ;
-        $this->getRendezVousPlaceLink = null ;
-        $this->getRendezVousDateTime = null ;
-    }
 }
