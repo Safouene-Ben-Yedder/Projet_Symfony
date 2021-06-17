@@ -1,12 +1,102 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Candidature index{% endblock %}
 
 {% block body %}
-    <h1>Candidature index</h1>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>FindJob</title>
+        <meta name="robots" content="noindex, follow" />
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/logo/findjob.png')}}">
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="{{asset('assets/css/vendor/bootstrap.min.css')}}">
 
-    <table class="table">
+        <!-- Icon Font CSS -->
+        <link rel="stylesheet" href="{{asset('assets/css/vendor/font-awesome.min.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/vendor/flaticon.css')}}">
+
+        <!-- Plugins CSS -->
+        <link rel="stylesheet" href="{{asset('assets/css/plugins/slick.css')}}">
+
+        <!-- Main Style CSS -->
+        <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+        {#{{ encore_entry_link_tags('app') }}#}
+        {% block stylesheets %}{% endblock %}
+        {% block javascripts %}
+            {#{{ encore_entry_script_tags('app') }}#}
+        {% endblock %}
+    </head>
+    <body>
+    
+        <header class="header">
+        
+            <div class="container">
+            
+                <div class="row justify-content-between align-items-center">
+                               
+                    <!-- Header Logo Start -->
+                    <div class="col">
+                        <div class="header-logo">
+                            <a href=""><img src="{{asset('assets/images/logo/findjob.png')}}" style="width: 35%"alt="Site Logo"></a>
+                        </div>
+                    </div>
+                    <div class="header-links col-auto order-lg-3">
+                        &nbsp&nbsp&nbsp&nbsp<a  href="{{ path('app_logout') }}" >Déconnexion</a>&nbsp<i class="fas fa-sign-out-alt"> </i>
+                    </div>
+
+                    <!-- Header Menu Start -->
+                    <nav id="main-menu" class="main-menu col-lg-auto order-lg-2">
+                       <ul>
+                            <li class="has-children"><a href="{{ path('home') }}">Acceuil</a></li>
+                            <li class="has-children"><a href="{{ path('offre_emploi_byrecuiter') }}">Mes offres d'emploi</a></li>
+                            <li><a href="{{ path('candidature_index') }}">Les Catégories</a></li>
+                            <li><a href="{{ path('candidature_index') }}">Les candidatures</a></li>
+
+                            
+                        </ul>
+
+
+                    </nav>
+                    <!-- Header Menu End -->
+                </div>
+            </div>
+        </header>
+               
+        <!--OffCanvas Overlay-->
+        <div class="offcanvas-overlay"></div>
+
+
+
+<!-- Page Heading Section Start -->
+    <div class="page-heading-section section bg-parallax" data-bg-image="{{asset('assets/images/bg/bg-1.jpg')}}" data-overlay="50">
+        <div class="container">
+            <div class="page-heading-content text-center">
+                <h3 class="title">Les candidatures</h3>
+                <ol class="breadcrumb">
+                    <li><a href="#" >{{ app.user.NomUtilisateur }}</a></li>
+                    {# <li class="breadcrumb-item active">Mon profil</li> #}
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div class="section section-padding">
+
+            <div class="row">
+                <div class="col-lg-10 col-12 mx-auto">
+                    <div class="faq-card card">
+                    <!-- Page Heading Section End -->
+
+    <table class="table table-dark">
+      
         <thead>
+       
             <tr>
 
                 <th>Date de postulation</th>
@@ -18,6 +108,7 @@
                 <th>Place ou Link</th>
                 <th>actions</th>
             </tr>
+            
         </thead>
         <tbody>
         {% for candidature in candidatures %}
@@ -48,18 +139,18 @@
                  {% endif %}
                 {% endif %}
                 <td>
-                    <a href="{{ path('candidature_rec_show', {'id': candidature.id}) }}">show</a>
+                    <a class="btn btn-light"  href="{{ path('candidature_rec_show', {'id': candidature.id}) }}">show</a>
                     {% if candidature.etatCandidature == 1 %}
-                    <a href="{{ path('candidature_rec_edit', {'id': candidature.id}) }}">Valider</a> {# tsir creation mta3 rendez vous w validation  #}
-                    <a href="{{ path('candidature_rec_Refuser', {'id': candidature.id}) }}">Réfuser Candidature</a> {# etat te5ou 2 #}
+                    <a class="btn btn-light"  href="{{ path('candidature_rec_edit', {'id': candidature.id}) }}">Valider</a> {# tsir creation mta3 rendez vous w validation  #}
+                    <a class="btn btn-light"  href="{{ path('candidature_rec_Refuser', {'id': candidature.id}) }}">Réfuser Candidature</a> {# etat te5ou 2 #}
                     {% endif %}
                     {% if candidature.RendezVousEnligne != null %}
-                    <a href="{{ path('SupprimerRV', {'id': candidature.id}) }}">Supprimer Rendez Vous</a> {# ken fama rendez vous tsir suppression / deja validé  #}
+                    <a class="btn btn-light"  href="{{ path('SupprimerRV', {'id': candidature.id}) }}">Supprimer Rendez Vous</a> {# ken fama rendez vous tsir suppression / deja validé  #}
                     {% endif %}
 
                     {% if candidature.RendezVousEnligne == null %} {# validé ama render vous supprimer donc ynajm yaawed yaamel rendez vous  #}
                     {% if candidature.etatCandidature == 2  %}
-                    <a href="{{ path('candidature_rec_edit', {'id': candidature.id}) }}">Créer Rendez Vous</a> 
+                    <a class="btn btn-light"  href="{{ path('candidature_rec_edit', {'id': candidature.id}) }}">Créer Rendez Vous</a> 
                     {% endif %}
                     {% endif %}
 
@@ -74,5 +165,5 @@
         {% endfor %}
         </tbody>
     </table>
-
+</div>
 {% endblock %}
