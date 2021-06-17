@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Form\UserPhotoEditType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -80,6 +81,49 @@ class UserController extends AbstractController
                 }
         
                 return $this->render('user/edit.html.twig', [
+                    'user' => $candidat,
+                    'form' => $form->createView(),
+                ]);
+            } else {
+                return $this->redirectToRoute('user_show');
+            }
+    }
+
+    /**
+     * @Route("/edit/photo/{id}", name="user_photo_edit", methods={"GET","POST"})
+     */
+    public function editPhoto(Request $request, User $user): Response
+    {   
+            $candidat = $this->getUser();
+            if ($user->getId() == $candidat->getId()) {
+                $form = $this->createForm(UserPhotoEditType::class, $candidat);
+                $form->handleRequest($request);
+        
+                if ($form->isSubmitted() && $form->isValid()) {
+
+                    // pour la photo du profil
+                    $PhotoFile = $form->get('Photo')->getData();
+
+                    if ($PhotoFile) {
+                        $originalPhotoName = pathinfo($PhotoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                        $safePhotoName = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalPhotoName);
+                        $newPhotoName = $safePhotoName.'-'.uniqid().'.'.$PhotoFile->guessExtension();
+                        try {
+                            $PhotoFile->move(
+                                $this->getParameter('photo_directory'),
+                                $newPhotoName
+                            );
+                        } catch (FileException $e) {
+                            // ... handle exception if something happens during file upload
+                        }
+                        $user->setPhoto($newPhotoName);
+                    }
+                    $this->getDoctrine()->getManager()->flush();
+                    
+                    return $this->redirectToRoute('user_show');
+                }
+        
+                return $this->render('user/editPhoto.html.twig', [
                     'user' => $candidat,
                     'form' => $form->createView(),
                 ]);

@@ -10,27 +10,19 @@ use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 
-class UserType extends AbstractType
+class UserPhotoEditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Nom_utilisateur')
-            ->add('email')            
-            ->add('CIN')
-            ->add('Telephone')
-            ->add('Date_naissance')
-            ->add('Type')            
-            ->add('CV', FileType::class, [
+            ->add('Photo', FileType::class, array('data_class' => null), [
                 'mapped' => false,
-                'required' => false,
                 'constraints' => [
                     new File([
                         'mimeTypes' => [
-                            'application/pdf',
-                            'application/x-pdf',
+                            'image/jpeg',
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid PDF document',
+                        'mimeTypesMessage' => 'Please upload a valid JPG image',
                     ])
                 ],
             ])

@@ -42,7 +42,6 @@ class AdminCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {   
-        $regles =  $this->getDoctrine()->getManager()->getRepository(Regles::class)->findAll();
         return [
             IdField::new('id')->hideOnForm(),
             EmailField::new('email')->hideOnIndex(),

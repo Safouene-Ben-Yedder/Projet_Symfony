@@ -46,9 +46,6 @@ class CandidatCrudController extends AbstractCrudController
             ImageField::new('Photo')
             ->setBasePath('/uploads/Photo')
             ->onlyOnIndex(),
-            // TextareaField::new('Photo')
-            // ->setFormType(VichImageType::class)
-            // ->hideOnIndex(),
             EmailField::new('email')->hideOnIndex(),
             TextField::new('nomUtilisateur'),
             IntegerField::new('telephone'),

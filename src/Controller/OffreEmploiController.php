@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controller;
-
 use App\Entity\OffreEmploi;
 use App\Form\OffreEmploiType;
 use App\Repository\OffreEmploiRepository;

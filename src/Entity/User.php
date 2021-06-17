@@ -45,7 +45,7 @@ class User implements UserInterface
     private $Nom_utilisateur;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, unique=true)
      */
     private $CIN;
 
