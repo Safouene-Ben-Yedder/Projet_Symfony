@@ -126,11 +126,23 @@
 
                 <td>{{ candidature.DateCreation ? candidature.DateCreation|date('Y-m-d') : '' }}</td>
                 <td>{{ candidature.user.NomUtilisateur}}</td>
-                <td>{{ candidature.etatCandidature ? 'Acceptée' : 'En attente' }}</td>
-                {% if candidature.RendezVousEnligne != null %}
+                {% if candidature.etatCandidature == 0 %}
+                <td>Réfusée</td>
+                {% endif %}
+                                {% if candidature.etatCandidature == 1 %}
+                <td>En attente</td>
+                {% endif %}
+                                {% if candidature.etatCandidature == 2 %}
+                <td>Acceptée</td>
+                {% endif %}
+                {% if candidature.RendezVousComment != null %}
                 <td>{{ candidature.RendezVousDateTime ? candidature.RendezVousDateTime|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ candidature.RendezVousComment }}</td>
-                <td>{{ candidature.RendezVousEnligne ? 'Oui' : 'Non' }}</td>
+                {% if candidature.RendezVousEnligne != null %}
+                <td>Oui</td>
+                {% else %}
+                <td>Non</td>
+                {% endif %}
                 <td>{{ candidature.RendezVousPlaceLink }}</td>
                 {% else %}
                 <td>Pas encore crée </td>
@@ -140,18 +152,18 @@
                  {% endif %}
                 {% endif %}
                 <td>
-                    <a class="btn btn-light"  href="{{ path('candidature_rec_show', {'id': candidature.id}) }}">show</a>
+                    <a class="btn btn-light"  href="{{ path('candidature_rec_show', {'id': candidature.id}) }}">show</a><br><br>
                     {% if candidature.etatCandidature == 1 %}
-                    <a class="btn btn-light"  href="{{ path('candidature_rec_edit', {'id': candidature.id}) }}">Valider</a> {# tsir creation mta3 rendez vous w validation  #}
-                    <a class="btn btn-light"  href="{{ path('candidature_rec_Refuser', {'id': candidature.id}) }}">Réfuser Candidature</a> {# etat te5ou 2 #}
+                    <a class="btn btn-light"  href="{{ path('candidature_rec_edit', {'id': candidature.id}) }}">Valider</a> {# tsir creation mta3 rendez vous w validation  #}<br><br>
+                    <a class="btn btn-light"  href="{{ path('candidature_rec_Refuser', {'id': candidature.id}) }}">Réfuser Candidature</a> {# etat te5ou 2 #}<br><br>
                     {% endif %}
-                    {% if candidature.RendezVousEnligne != null %}
-                    <a class="btn btn-light"  href="{{ path('SupprimerRV', {'id': candidature.id}) }}">Supprimer Rendez Vous</a> {# ken fama rendez vous tsir suppression / deja validé  #}
+                    {% if candidature.RendezVousPlaceLink != null %}
+                    <a class="btn btn-light"  href="{{ path('SupprimerRV', {'id': candidature.id}) }}">Supprimer Rendez Vous</a><br><br> {# ken fama rendez vous tsir suppression / deja validé  #}
                     {% endif %}
 
-                    {% if candidature.RendezVousEnligne == null %} {# validé ama render vous supprimer donc ynajm yaawed yaamel rendez vous  #}
+                    {% if candidature.RendezVousPlaceLink == null %} {# validé ama render vous supprimer donc ynajm yaawed yaamel rendez vous  #}
                     {% if candidature.etatCandidature == 2  %}
-                    <a class="btn btn-light"  href="{{ path('candidature_rec_edit', {'id': candidature.id}) }}">Créer Rendez Vous</a> 
+                    <a class="btn btn-light"  href="{{ path('candidature_rec_edit', {'id': candidature.id}) }}">Créer Rendez Vous</a> <br><br>
                     {% endif %}
                     {% endif %}
 

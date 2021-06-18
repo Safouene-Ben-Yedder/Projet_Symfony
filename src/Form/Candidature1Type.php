@@ -26,7 +26,7 @@ class Candidature1Type extends AbstractType
                 'label'    => 'Objet'
             ])
             ->add('RendezVousEnligne', CheckboxType::class, [
-                'required' => true,
+                'required' => false,
                 'label'    => 'Rendez-Vous en ligne ?'
             ])
             ->add('RendezVousPlaceLink', TextType::class, [

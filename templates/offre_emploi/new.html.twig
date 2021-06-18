@@ -1,11 +1,93 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}New OffreEmploi{% endblock %}
 
 {% block body %}
-    <h1>Create new OffreEmploi</h1>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>FindJob</title>
+        <meta name="robots" content="noindex, follow" />
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/logo/findjob.png')}}">
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="{{asset('assets/css/vendor/bootstrap.min.css')}}">
+
+        <!-- Icon Font CSS -->
+        <link rel="stylesheet" href="{{asset('assets/css/vendor/font-awesome.min.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/vendor/flaticon.css')}}">
+
+        <!-- Plugins CSS -->
+        <link rel="stylesheet" href="{{asset('assets/css/plugins/slick.css')}}">
+
+        <!-- Main Style CSS -->
+        <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+        {#{{ encore_entry_link_tags('app') }}#}
+        {% block stylesheets %}{% endblock %}
+        {% block javascripts %}
+            {#{{ encore_entry_script_tags('app') }}#}
+        {% endblock %}
+    </head>
+    <body>
+    
+        <header class="header">
+        
+            <div class="container">
+            
+                <div class="row justify-content-between align-items-center">
+                               
+                    <!-- Header Logo Start -->
+                    <div class="col">
+                        <div class="header-logo">
+                            <a href=""><img src="{{asset('assets/images/logo/findjob.png')}}" style="width: 35%"alt="Site Logo"></a>
+                        </div>
+                    </div>
+                    <div class="header-links col-auto order-lg-3">
+                        &nbsp&nbsp&nbsp&nbsp<a  href="{{ path('app_logout') }}" >Déconnexion</a>&nbsp<i class="fas fa-sign-out-alt"> </i>
+                    </div>
+
+                    <!-- Header Menu Start -->
+                    <nav id="main-menu" class="main-menu col-lg-auto order-lg-2">
+
+
+                                                <ul>
+                            <li class="has-children"><a href="{{ path('Acceuil') }}">Accueil</a></li>
+
+
+                            
+                        </ul>
+                    </nav>
+                    <!-- Header Menu End -->
+                </div>
+            </div>
+        </header>
+               
+        <!--OffCanvas Overlay-->
+        <div class="offcanvas-overlay"></div>
+
+
+
+<!-- Page Heading Section Start -->
+    <div class="page-heading-section section bg-parallax" data-bg-image="{{asset('assets/images/bg/bg-1.jpg')}}" data-overlay="50">
+        <div class="container">
+            <div class="page-heading-content text-center">
+                <h3 class="title">Creation de l'offre d'emploi </h3>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="section ">
+
+                <div class="col-lg-10 col-12 mx-auto">
+<br><br>
 
     {{ include('offre_emploi/_form.html.twig') }}
-
-    <a href="{{ path('offre_emploi_index') }}">back to list</a>
+<br>
+    <a class="btn btn-dark col-12 mx-auto" href="{{ path('offre_emploi_byrecuiter') }}">Retour à la liste</a>
+    <br><br>
 {% endblock %}

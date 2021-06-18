@@ -104,7 +104,15 @@
             </tr>
             <tr>
                 <th>EtatCandidature</th>
-                <td>{{ candidature.etatCandidature ? 'Acceptée' : 'En attente' }}</td>
+                {% if candidature.etatCandidature == 0 %}
+                <td>Réfusée</td>
+                {% endif %}
+                                {% if candidature.etatCandidature == 1 %}
+                <td>En attente</td>
+                {% endif %}
+                                {% if candidature.etatCandidature == 2 %}
+                <td>Acceptée</td>
+                {% endif %}
             </tr>
             <tr>
                 <th> Nom candidat</th>
@@ -159,8 +167,12 @@
     </table>
 {% else  %}
 
+{% if candidature.etatCandidature != 0 %}
 <p style="font-weight: bold;"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Pas encore crée</p>
 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a class="btn btn-dark" href="{{ path('candidature_rec_edit', {'id': candidature.id}) }}">Créer Rendez Vous</a><br>
+{% else %}
+<p style="font-weight: bold;"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Candidature réfusée</p>
+{% endif %}
 {% endif %}
 
 
@@ -169,5 +181,6 @@
 <a class="btn btn-dark" href="{{ path('candidature_rec_edit', {'id': candidature.id}) }}">Valider</a> {# tsir creation mta3 rendez vous w validation  #}
 <a class="btn btn-dark" href="{{ path('candidature_rec_Refuser', {'id': candidature.id}) }}">Réfuser Candidature</a> {# etat te5ou 2 #}<br>
 {% endif %}
+ <br><a class="btn btn-dark col-12 mx-auto" href="{{ path('candidature_rec_index') }}">Retour à la liste</a>
 <br><br><br><br><br>
 {% endblock %}
