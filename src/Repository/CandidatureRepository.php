@@ -37,6 +37,16 @@ class CandidatureRepository extends ServiceEntityRepository
         ;
     }
     
+    public function findByUser($user)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.user = :val1')
+            ->setParameter('val1', $user)
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
     /*
     public function findOneBySomeField($value): ?Candidature

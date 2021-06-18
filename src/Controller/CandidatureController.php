@@ -25,7 +25,7 @@ class CandidatureController extends AbstractController
     {   
         $nbrepost = $this->getUser()->getNbrePos();
         return $this->render('candidature/index.html.twig', [
-            'candidatures' => $candidatureRepository->findAll(),
+            'candidatures' => $candidatureRepository->findByUser($this->getUser()),
             'nbrepostulation' => $nbrepost,
         ]);
     }
