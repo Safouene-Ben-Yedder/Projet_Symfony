@@ -57,7 +57,9 @@
                            {{ app.user.NomUtilisateur }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            {% if is_granted('ROLE_CANDIDAT') %}
                             <a class="dropdown-item" href="{{ path('user_show') }}">Mon profil</a>
+                            {% endif %}
                             <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
                         </div>
                         </div>
@@ -71,26 +73,16 @@
                     <!-- Header Menu Start -->
                     <nav id="main-menu" class="main-menu col-lg-auto order-lg-2">
                         <ul>
-                            <li class="has-children"><a href="{{ path('home') }}">Accueil</a></li>
                             {% if is_granted('ROLE_RECRUTEUR') %}
+                            <li class="has-children"><a href="{{ path('Acceuil') }}">Accueil</a></li>
                             <li class="has-children"><a href="{{ path('offre_emploi_byrecuiter') }}">Mes offres d'emploi</a></li>
+                            <li class="has-children"><a href="{{ path('candidature_rec_index') }}">Les candidatures</a></li>        
                             {% endif %}
-                            <li class="has-children"><a href="{{ path('offre_emploi_index') }}">Offres d'emploi</a></li>
                             {% if is_granted('ROLE_CANDIDAT') %}
+                            <li><a href="{{ path('home') }}">Accueil</a></li>
+                            <li class="has-children"><a href="{{ path('offre_emploi_index') }}">Offres d'emploi</a></li>
                             <li><a href="{{ path('candidature_index') }}">Mes candidatures</a></li>
                             {% endif %}
-                            {# <li><a href="#">Pages</a>
-                                <ul class="sub-menu">
-
-                                </ul>
-                            </li>
-                            <li><a href="blog.html">Blog</a>
-                                <ul class="sub-menu">
-                                    <li><a href="blog.html">Blog</a></li>
-                                    <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                                    <li><a href="blog-single.html">Blog Single</a></li>
-                                </ul>
-                            </li> #}
                             <li><a href="contact.html">Contact</a></li>
                         </ul>
                     </nav>

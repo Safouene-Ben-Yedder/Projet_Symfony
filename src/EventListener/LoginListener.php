@@ -18,18 +18,21 @@ class LoginListener {
 
     if ($user instanceof User) {
       
-      $date = new \Datetime();
-      $expiration =$user->getRegles()->getDureeExpiration();
-      $date_expiration = date_add(new \Datetime(), date_interval_create_from_date_string("$expiration days"));
+      if ($user->getRoles() == "['ROLE_RECRUTEUR']") {
+        $date = new \Datetime();
+        $expiration =$user->getRegles()->getDureeExpiration();
+        $date_expiration = date_add(new \Datetime(), date_interval_create_from_date_string("$expiration days"));
         
-      if ($date < $date_expiration) {
-            $user->setDateLastLogin($date);
-            $this->em->persist($user);
-            $this->em->flush();
-        } else {
-            $this->em->remove($user);
-            $this->em->flush();
+        if ($date < $date_expiration) {
+              $user->setDateLastLogin($date);
+              $this->em->persist($user);
+              $this->em->flush();
+          } else {
+              $this->em->remove($user);
+              $this->em->flush();
+        }
       }
+
     }
   }
 }
