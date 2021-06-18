@@ -35,6 +35,7 @@ class CategorieOffreController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $categorieOffre->setCreator($this->getuser()->getId());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($categorieOffre);
             $entityManager->flush();

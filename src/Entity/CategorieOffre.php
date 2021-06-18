@@ -34,6 +34,11 @@ class CategorieOffre
      */
     private $offreEmplois;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $Creator;
+
     public function __construct()
     {
         $this->offreEmplois = new ArrayCollection();
@@ -101,5 +106,17 @@ class CategorieOffre
     public function __toString()
     {
         return $this->Nom;
+    }
+
+    public function getCreator(): ?int
+    {
+        return $this->Creator;
+    }
+
+    public function setCreator(?int $Creator): self
+    {
+        $this->Creator = $Creator;
+
+        return $this;
     }
 }

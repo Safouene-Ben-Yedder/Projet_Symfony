@@ -55,7 +55,7 @@
 
 
                                                 <ul>
-                            <li class="has-children"><a href="{{ path('Accueil') }}">Acceuil</a></li>
+                            <li class="has-children"><a href="{{ path('home') }}">Acceuil</a></li>
 
 
                             
@@ -98,6 +98,7 @@
         </thead>
         <tbody>
         {% for categorie_offre in categorie_offres %}
+        >{% if categorie_offre.Creator == app.user.Id %}
             <tr>
 
                 <td>{{ categorie_offre.Nom }}</td>
@@ -107,6 +108,7 @@
                     <a class="btn btn-dark " href="{{ path('categorie_offre_edit', {'id': categorie_offre.id}) }}">Modifier</a>
                 </td>
             </tr>
+            {% endif %}
         {% else %}
             <tr>
                 <td colspan="4">no records found</td>
