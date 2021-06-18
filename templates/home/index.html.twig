@@ -10,40 +10,6 @@
                     <h2 class="title">Find Your Next Job</h2>
                     <p>More then <span>1,524</span> job listed here.</p>
                 </div>
-
-                <!-- Job Search Form Start -->
-                <div class="job-search-form-2">
-                    <form action="#">
-                        <div class="row no-gutters mb-n2 mb-sm-n0">
-
-                            <div class="col-lg-auto col-sm-6 col-12 flex-grow-1 mb-2 mb-sm-0">
-                                <input type="text" placeholder="e.g. web design">
-                            </div>
-
-                            <div class="col-lg-auto col-sm-6 col-12 flex-grow-1 mb-2 mb-sm-0">
-                                <input type="text" placeholder="Location">
-                            </div>
-
-                            <div class="col-lg-auto col-sm-6 col-12 flex-grow-1 mb-2 mb-sm-0">
-                                <select>
-                                    <option value="1">Any category</option>
-                                    <option value="2">Web Designer</option>
-                                    <option value="3">Web Developer</option>
-                                    <option value="4">Graphic Designer</option>
-                                    <option value="5">App Developer</option>
-                                    <option value="6">UI &amp; UX Expert</option>
-                                </select>
-                            </div>
-
-                            <div class="col-lg-auto col-sm-6 col-12 flex-grow-1 mb-2 mb-sm-0">
-                                <button class="btn btn-primary">Search</button>
-                            </div>
-
-                        </div>
-                    </form>
-                </div>
-                <!-- Job Search Form End -->
-
             </div>
         </div>
     </div>
@@ -168,108 +134,33 @@
             <!-- Job List Wrap Start -->
             <div class="job-list-wrap">
 
-                <!-- Job List Start -->
-                <a href="job-single.html" class="job-list">
-                    <div class="company-logo col-auto">
-                        <img src="assets/images/companies/company-1.png" alt="Company Logo">
-                    </div>
-                    <div class="salary-type col-auto order-sm-3">
-                        <span class="salary-range">$5000 - $8000</span>
-                        <span class="badge badge-success">Full Time</span>
-                    </div>
-                    <div class="content col">
-                        <h6 class="title">Full Stack Backend Developer</h6>
-                        <ul class="meta">
-                            <li><strong class="text-primary">Envato</strong></li>
-                            <li><i class="fa fa-map-marker"></i> 2020 Willshire Glen, GA-30009</li>
-                        </ul>
-                    </div>
-                </a>
-                <!-- Job List Start -->
-
-                <!-- Job List Start -->
-                <a href="job-single.html" class="job-list">
-                    <div class="company-logo col-auto">
-                        <img src="assets/images/companies/company-2.png" alt="Company Logo">
-                    </div>
-                    <div class="salary-type col-auto order-sm-3">
-                        <span class="salary-range">$7000 - $13000</span>
-                        <span class="badge badge-warning">Part Time</span>
-                    </div>
-                    <div class="content col">
-                        <h6 class="title">Product UI & UX Expert</h6>
-                        <ul class="meta">
-                            <li><strong class="text-primary">Astha</strong></li>
-                            <li><i class="fa fa-map-marker"></i> 2020 Willshire Glen, GA-30009</li>
-                        </ul>
-                    </div>
-                </a>
-                <!-- Job List Start -->
-
-                <!-- Job List Start -->
-                <a href="job-single.html" class="job-list">
-                    <div class="company-logo col-auto">
-                        <img src="assets/images/companies/company-3.png" alt="Company Logo">
-                    </div>
-                    <div class="salary-type col-auto order-sm-3">
-                        <span class="salary-range">$5000 - $8000</span>
-                        <span class="badge badge-danger">Freelance</span>
-                    </div>
-                    <div class="content col">
-                        <h6 class="title">Full Stack Backend Developer</h6>
-                        <ul class="meta">
-                            <li><strong class="text-primary">Github</strong></li>
-                            <li><i class="fa fa-map-marker"></i> 2020 Willshire Glen, GA-30009</li>
-                        </ul>
-                    </div>
-                </a>
-                <!-- Job List Start -->
-
-                <!-- Job List Start -->
-                <a href="job-single.html" class="job-list">
-                    <div class="company-logo col-auto">
-                        <img src="assets/images/companies/company-4.png" alt="Company Logo">
-                    </div>
-                    <div class="salary-type col-auto order-sm-3">
-                        <span class="salary-range">$7000 - $13000</span>
-                        <span class="badge badge-success">Full Time</span>
-                    </div>
-                    <div class="content col">
-                        <h6 class="title">Product UI & UX Expert</h6>
-                        <ul class="meta">
-                            <li><strong class="text-primary">Medicore</strong></li>
-                            <li><i class="fa fa-map-marker"></i> 2020 Willshire Glen, GA-30009</li>
-                        </ul>
-                    </div>
-                </a>
-                <!-- Job List Start -->
-
-                <!-- Job List Start -->
-                <a href="job-single.html" class="job-list">
-                    <div class="company-logo col-auto">
-                        <img src="assets/images/companies/company-5.png" alt="Company Logo">
-                    </div>
-                    <div class="salary-type col-auto order-sm-3">
-                        <span class="salary-range">$5000 - $8000</span>
-                        <span class="badge badge-success">Full Time</span>
-                    </div>
-                    <div class="content col">
-                        <h6 class="title">Full Stack Backend Developer</h6>
-                        <ul class="meta">
-                            <li><strong class="text-primary">GreenSoul</strong></li>
-                            <li><i class="fa fa-map-marker"></i> 2020 Willshire Glen, GA-30009</li>
-                        </ul>
-                    </div>
-                </a>
-                <!-- Job List Start -->
+                 {% for offre_emploi in offre_emplois %}
+                        <!-- Job List Start -->
+                        <a href="{{ path('offre_emploi_show', {'id': offre_emploi.id}) }}" class="job-list">
+                            <div class="company-logo col-auto">
+                                <img src="{{asset('assets/images/companies/company-1.png')}}" alt="Company Logo">
+                            </div>
+                            <div class="salary-type col-auto order-sm-3">
+                                <span class="salary-range">{{ offre_emploi.Salaire }}DT</span>
+                                <span class="badge badge-success">{{ offre_emploi.Statut }}</span>
+                            </div>
+                            <div class="content col">
+                                <h6 class="title">{{ offre_emploi.NomOffre }}</h6>
+                                <ul class="meta">
+                                    <li><strong class="text-primary">{{ offre_emploi.IdRecruteur.NomUtilisateur }}</strong></li>
+                                    <li><i class="fa fa-map-marker"></i>{{ offre_emploi.Location }}</li>
+                                </ul>
+                            </div>
+                        </a>
+                        <!-- Job List Start -->
+        {% else %}
+            <tr>
+                <td colspan="8">Aucun offre trouvé</td>
+            </tr>
+        {% endfor %}
 
             </div>
             <!-- Job List Wrap Start -->
-
-            <div class="text-center mt-4 mt-lg-5">
-                <a href="job-list.html" class="btn btn-primary">View All Jobs</a>
-            </div>
-
         </div>
     </div>
     <!-- Recent Jobs End -->
@@ -342,192 +233,4 @@
         </div>
     </div>
     <!-- App Section End -->
-
-    <!-- Pricing Section Start -->
-    <div class="section section-padding bg-gray">
-        <div class="container">
-
-            <div class="section-title">
-                <h2 class="title">Pricing</h2>
-                <p>Choose a plan that fits your needs</p>
-            </div>
-
-            <!-- Pricing Wrap Start -->
-            <div class="pricing-wrap row">
-
-                <!-- Pricing Start -->
-                <div class="col-lg-4 col-md-6 col-sm-8 col-12 mx-auto">
-                    <div class="pricing">
-                        <div class="inner">
-
-                            <div class="head">
-                                <span class="title">Basic</span>
-                                <h2 class="price"><sup>$</sup>0<sup>.00</sup></h2>
-                                <span class="duration">Per Month</span>
-                            </div>
-
-                            <div class="body">
-                                <ul>
-                                    <li>1 job posting</li>
-                                    <li>0 featured job</li>
-                                    <li>Job displayed for 15 days</li>
-                                    <li>Email Support</li>
-                                </ul>
-                            </div>
-
-                            <div class="foot">
-                                <button class="btn">Buy Now</button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- Pricing End -->
-
-                <!-- Pricing Start -->
-                <div class="col-lg-4 col-md-6 col-sm-8 col-12 mx-auto">
-                    <div class="pricing">
-                        <div class="inner">
-
-                            <div class="head">
-                                <span class="title">Standard</span>
-                                <h2 class="price"><sup>$</sup>10<sup>.99</sup></h2>
-                                <span class="duration">Per Month</span>
-                            </div>
-
-                            <div class="body">
-                                <ul>
-                                    <li>5 job posting</li>
-                                    <li>1 featured job</li>
-                                    <li>Job displayed for 30 days</li>
-                                    <li>Premium Support 24/7</li>
-                                </ul>
-                            </div>
-
-                            <div class="foot">
-                                <button class="btn">Buy Now</button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- Pricing End -->
-
-                <!-- Pricing Start -->
-                <div class="col-lg-4 col-md-6 col-sm-8 col-12 mx-auto">
-                    <div class="pricing">
-                        <div class="inner">
-
-                            <div class="head">
-                                <span class="title">Professional</span>
-                                <h2 class="price"><sup>$</sup>25<sup>.99</sup></h2>
-                                <span class="duration">Per Month</span>
-                            </div>
-
-                            <div class="body">
-                                <ul>
-                                    <li>15 job posting</li>
-                                    <li>4 featured job</li>
-                                    <li>Job displayed for 60 days</li>
-                                    <li>Premium Support 24/7</li>
-                                </ul>
-                            </div>
-
-                            <div class="foot">
-                                <button class="btn">Buy Now</button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- Pricing End -->
-
-            </div>
-            <!-- Pricing Wrap End -->
-
-        </div>
-    </div>
-    <!-- Pricing Section End -->
-
-    <!-- Blog Section Start -->
-    <div class="section section-padding">
-        <div class="container">
-
-            <div class="section-title">
-                <h3 class="title">Our Blog</h3>
-                <p>Get more tips & tricks from out blog post.</p>
-            </div>
-
-            <!-- Blog Slider Start -->
-            <div class="blog-slider row">
-
-                <!-- Blog Start -->
-                <div class="col">
-                    <div class="blog">
-                        <div class="media">
-                            <a href="blog-single.html"><img src="assets/images/blog/blog-1.jpg" alt=""></a>
-                        </div>
-                        <div class="content">
-                            <h6 class="title"><a href="blog-single.html">The Top 5 Job Interview Questions For IT Professional</a></h6>
-                            <ul class="meta">
-                                <li>Posted on 25 Jan, 2019</li>
-                                <li><a href="#">3 Comments</a></li>
-                            </ul>
-                            <div class="desc">
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium fugiat fugit voluptates ut rem vitae.</p>
-                            </div>
-                            <a href="blog-single.html" class="read-more">Read More <i class="fa fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Blog End -->
-
-                <!-- Blog Start -->
-                <div class="col">
-                    <div class="blog">
-                        <div class="media">
-                            <a href="blog-single.html"><img src="assets/images/blog/blog-2.jpg" alt=""></a>
-                        </div>
-                        <div class="content">
-                            <h6 class="title"><a href="blog-single.html">7 Careers To Consider If You Love Traveling</a></h6>
-                            <ul class="meta">
-                                <li>Posted on 25 Jan, 2019</li>
-                                <li><a href="#">3 Comments</a></li>
-                            </ul>
-                            <div class="desc">
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium fugiat fugit voluptates ut rem vitae.</p>
-                            </div>
-                            <a href="blog-single.html" class="read-more">Read More <i class="fa fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Blog End -->
-
-                <!-- Blog Start -->
-                <div class="col">
-                    <div class="blog">
-                        <div class="media">
-                            <a href="blog-single.html"><img src="assets/images/blog/blog-3.jpg" alt=""></a>
-                        </div>
-                        <div class="content">
-                            <h6 class="title"><a href="blog-single.html">When the Perfect Candidate Turns Out To Be an Imperfect Fit</a></h6>
-                            <ul class="meta">
-                                <li>Posted on 25 Jan, 2019</li>
-                                <li><a href="#">3 Comments</a></li>
-                            </ul>
-                            <div class="desc">
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium fugiat fugit voluptates ut rem vitae.</p>
-                            </div>
-                            <a href="blog-single.html" class="read-more">Read More <i class="fa fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Blog End -->
-
-            </div>
-            <!-- Blog Slider End -->
-
-        </div>
-    </div>
-    <!-- Blog Section End -->
 {% endblock %}

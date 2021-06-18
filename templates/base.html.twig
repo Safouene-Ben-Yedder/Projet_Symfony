@@ -52,12 +52,15 @@
                     <!-- Header Links Start -->
                     <div class="header-links col-auto order-lg-3">
                         {% if app.user %}
-                        <li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle">{{ app.user.NomUtilisateur }}</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="{{ path('user_show') }}" class="dropdown-item">Mon profil</a></li>
-                                    <li><a href="{{ path('app_logout') }}" class="dropdown-item">Déconnexion</a></li>
-                                </ul>
-                        </li>
+                        <div class="dropdown show" width="50%">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           {{ app.user.NomUtilisateur }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="{{ path('user_show') }}">Mon profil</a>
+                            <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
+                        </div>
+                        </div>
                         {% else %}
                         <a href="{{ path('app_login') }}" >Login</a>
                         <span>or</span>

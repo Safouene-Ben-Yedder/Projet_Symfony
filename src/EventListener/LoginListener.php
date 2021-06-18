@@ -19,7 +19,7 @@ class LoginListener {
     if ($user instanceof User) {
       
       $date = new \Datetime();
-      $expiration ="90";
+      $expiration =$user->getRegles()->getDureeExpiration();
       $date_expiration = date_add(new \Datetime(), date_interval_create_from_date_string("$expiration days"));
         
       if ($date < $date_expiration) {
